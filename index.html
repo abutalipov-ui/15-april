@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Для Qarakozaiym ❤️</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: white; /* Начальный фон */
+        font-family:
+          "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        color: white;
+        text-align: center;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 1s ease; /* Плавная смена фона всего экрана */
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* Класс для смены фона на гифку (применяется к body) */
+      body.bg-gif {
+        background-image: url(".gif"); /* Сюда свою гифку */
+      }
+
+      .container {
+        background-color: #f53f72;
+        background-image: radial-gradient(circle at 20% 20%, #ff92a9, #f53f72);
+        width: 90%;
+        max-width: 500px;
+        padding: 40px;
+        border-radius: 20px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        transition: transform 0.5s ease;
+      }
+
+      h1 {
+        font-size: 38px;
+        margin: 0 0 10px;
+      }
+
+      p {
+        font-size: 20px;
+        margin: 20px auto;
+        line-height: 1.6;
+      }
+
+      button {
+        background: white;
+        color: #f53f72;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        background: #fff0f3;
+      }
+
+      .front-content {
+        transition: opacity 0.5s ease;
+      }
+
+      .front-content.hidden-fade {
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+      }
+
+      .message {
+        display: none;
+        opacity: 0;
+      }
+
+      .message.visible {
+        display: block;
+        animation: fadeInScale 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Сердечки (стикеры) */
+      .heart {
+        position: fixed;
+        color: #ffb3c1;
+        animation: fall 5s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes fall {
+        0% {
+          top: -10%;
+          opacity: 1;
+          transform: translateX(0) rotate(0deg);
+        }
+        100% {
+          top: 110%;
+          opacity: 0;
+          transform: translateX(50px) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="mainContainer">
+      <div class="front-content" id="front">
+        <h1>Qarakozaiym ❤️</h1>
+        <p>
+          С Днём любви 🌸<br />
+          Я хотел сделать необычный подарочек 🙂
+        </p>
+        <button onclick="showMessage()">Нажми сюда 💖</button>
+      </div>
+
+      <div id="message" class="message">
+        <p style="font-size: 18px; line-height: 1.8; margin: 0">
+          Каракозым меным<br />
+          Жалгыз козым меным<br />
+          Жанымнан гана табылган<br />
+          Табылсада журегымде орын калдырган<br />
+          Себебы, журек тек каракозыме арналган<br />
+          Ия мен жаман болгам бырак жаман болсамда кабылдаган<br />
+          Арманым тек журегын жаулау болган<br />
+          Махаббаттын кушымен козымде кормей калган<br />
+          Ойткены бул олен каракозыме арналган ❤️
+        </p>
+        <img src="hearts.gif" alt="" />
+      </div>
+    </div>
+
+    <script>
+      function showMessage() {
+        const front = document.getElementById("front");
+        const msg = document.getElementById("message");
+        const body = document.body;
+
+        // 1. Убираем первый контент
+        front.classList.add("hidden-fade");
+
+        // 2. Включаем гифку на весь экран
+        body.classList.add("bg-gif");
+
+        // 3. Плавно показываем сообщение
+        setTimeout(() => {
+          msg.classList.add("visible");
+        }, 500);
+      }
+
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        const icons = ["❤️", "💖", "🌸", "✨", "☁️"];
+        heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+        heart.style.opacity = Math.random();
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+
+      setInterval(createHeart, 300);
+    </script>
+  </body>
+</html>
